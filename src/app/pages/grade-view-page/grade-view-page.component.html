@@ -1,0 +1,53 @@
+<app-header/>
+<img class="settings-ico" src="../../../assets/svg/back.svg" alt="" [routerLink]="['../','admin']">
+<div *ngIf="isLoadGames && isLoadTypes && isLoadStatistics">
+  <div class="statistic-filter">
+    <div class="title">фильтры по типам</div>
+    <table>
+      <tr>
+        <th></th>
+        <th>тип игры</th>
+      </tr>
+      <tr *ngFor="let t of types">
+        <td><input class="checkbox" type="checkbox" (click)="addFilter(t.type)"
+                   [checked]="this.filters.includes(t.type)"></td>
+        <td>{{t.type}}</td>
+      </tr>
+    </table>
+    <div *ngIf="statisticFullData && statisticFullData.length > 0">
+      <div class="title">статистика по играм</div>
+      <table>
+        <tr>
+          <th>включить в отчет</th>
+          <th>игра</th>
+          <th>тип игры</th>
+          <th>дата игры</th>
+          <th>общее количество ответов</th>
+          <th>общее количество этапов опроса</th>
+        </tr>
+        <tr *ngFor="let s of statisticFullData; let i = index">
+          <td><input class="checkbox" type="checkbox" [checked]="s.selected" (click)="checkGame(i)"></td>
+          <td>{{s.game.title}}</td>
+          <td>{{s.game.type}}</td>
+          <td>{{s.game.dateGame | date:"dd.MM.yyyy"}}</td>
+          <td>{{s.countAnswers}}</td>
+          <td>{{s.countStage}}</td>
+        </tr>
+      </table>
+      <div class="btn" (click)="generateTable()">сформировать сводную таблицу</div>
+      <a class="btn" [href]="urlLoad+ 'games/'+JSON.stringify(gamesList)">Скачать excel</a>
+    </div>
+  </div>
+  <div class="statics-table-bottom">
+    <app-grade-game [grade]="s" *ngFor="let s of tableGrades"/>
+  </div>
+</div>
+
+<app-modal-info *ngIf='errorMessage'>
+  <div>{{errorMessage}}</div>
+  <div class="btn" (click)="closeModalInformer()">закрыть</div>
+</app-modal-info>
+
+<div *ngIf="!isLoadGames">
+  <app-loader></app-loader>
+</div>

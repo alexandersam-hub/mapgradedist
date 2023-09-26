@@ -1,0 +1,28 @@
+.grade-config-wrapper{
+  width: 90%;
+  max-width: 400px;
+  margin: 10px auto;
+  padding: 10px;
+  border: 2px solid var(--base-dark-color);
+  border-radius: 10px;
+}
+.delete-criteria{
+  width: 30px;
+  text-align: center;
+  cursor: pointer;
+  background-color: var(--base-dark-color);
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.grade-config-title{
+  font-weight: 600;
+  margin: 10px 0 5px 0;
+}
+.new-grade{
+  text-align: center;
+  color: rgba(0, 0, 0, 0.55);
+  font-weight: 600;
+  margin-bottom: 5px;
+}

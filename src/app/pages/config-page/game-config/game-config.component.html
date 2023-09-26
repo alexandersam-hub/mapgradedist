@@ -1,0 +1,39 @@
+<div *ngIf="isLoadGames && isLoadUsers && isLoadGrades; else loader" class="game-config-wrapper">
+  <div *ngIf="changedGame; else viewGame">
+    <app-game-config-card [game]="changedGame"
+                          (closeModalEmit)="closeModal()"
+                          [typesGames]="typesGames"
+                          [isError]="isError"
+                          [isViewInformer]="isViewInformer"
+                          [message]="message"
+                          [adminUsers]="adminUsers"
+                          [grades]="grades"
+                          [tasks]="tasks"
+                          (saveGameEmitter)="saveGame($event)"
+                          (cancelEmitter)="cancelRedactGame()"/>
+  </div>
+  <ng-template #viewGame>
+    <div *ngIf="games.length === 0" class="not-game-title">нет игр</div>
+    <div *ngIf="games.length >0">
+      <app-game-config-view *ngFor="let game of games" [game]="game">
+        <div class="btn-blue" (click)="setChangeGame(game)">изменить</div>
+        <div class="btn" (click)="requestDeleteGame(game)">удалить</div>
+        <div class="btn-green" (click)="copyGame(game)">копировать</div>
+      </app-game-config-view>
+    </div>
+    <div class="btn" (click)="addEmptyGame()">добавить игру</div>
+  </ng-template>
+</div>
+
+<div *ngIf="isViewConfirmWindow" class="center">
+  <app-modal-window>
+    <div class="message-modal">Удалить игру '{{deletedGame?.title??''}}'?</div>
+    <div class="btn" (click)="deleteGame()">Да</div>
+    <div class="btn" (click)="cancelModalWindow()">Отмена</div>
+  </app-modal-window>
+</div>
+
+
+<ng-template #loader>
+  <app-loader/>
+</ng-template>

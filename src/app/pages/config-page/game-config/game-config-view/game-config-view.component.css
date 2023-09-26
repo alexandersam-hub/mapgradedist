@@ -1,0 +1,17 @@
+.game-config-view-wrapper{
+  width: 90%;
+  max-width: 500px;
+  border: 3px solid var(--base-dark-color);
+  border-radius: 10px;
+  font-size: 18px;
+  padding: 10px;
+  margin: 10px auto;
+}
+
+.game-config-view-title{
+  font-weight: 600;
+}
+
+.game-config-view-description{
+  color: rgba(0, 0, 0, 0.79);
+}

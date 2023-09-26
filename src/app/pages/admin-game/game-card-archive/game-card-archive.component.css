@@ -1,0 +1,23 @@
+.game-card-wrapper{
+  max-width: 400px;
+  margin: 20px auto;
+  border-radius: 10px;
+}
+.game-card-title{
+  font-size: 24px;
+  font-weight: 600;
+}
+.game-card-date,
+.game-card-type{
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.51);
+}
+
+.game-card-date{
+  font-size: 16px;
+}
+.game-code{
+  font-weight: bold;
+  font-size: 20px;
+}

@@ -1,0 +1,20 @@
+<div *ngIf="grade" class="grade-config-wrapper">
+  <div class="new-grade" *ngIf="grade.id==='new'">новый несохраненный опрос</div>
+  <div class="grade-config-title">Название</div>
+  <input type="text" [(ngModel)]="grade.title" placeholder="название">
+
+  <div class="grade-config-title">Вопрос</div>
+  <input type="text" [(ngModel)]="grade.question" placeholder="вопрос">
+  <div class="grade-config-title">Критерии</div>
+   <table>
+     <tr *ngFor="let c of grade.criteria; let i = index">
+         <td>{{i+1}}.</td>
+        <td> <input type="text" [(ngModel)]="c.text"></td>
+         <td class="delete-criteria" (click)="deleteCriteria(i)">-</td>
+     </tr>
+   </table>
+   <div class="btn-blue" (click)="addCriteria()">добавить критерий</div>
+  <hr>
+  <div class="btn" (click)="deleteGrade()">удалить</div>
+  <div class="btn-green" (click)="saveGrade()">сохранить</div>
+</div>

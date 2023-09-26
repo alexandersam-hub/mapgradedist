@@ -1,0 +1,12 @@
+.statistic-page-not-data{
+  font-size: 24px;
+  font-weight: 600;
+  padding: 20px;
+  text-align: center;
+  color: var(--base-dark-color);
+}
+.statistic-page-char-wrapper{
+  width: 90%;
+  max-width: 500px;
+  margin: 20px auto 5px auto;
+}

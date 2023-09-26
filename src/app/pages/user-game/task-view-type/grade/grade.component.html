@@ -1,0 +1,20 @@
+<div *ngIf="grade" class="grade-wrapper">
+  <div class="grade-question">{{grade.question}}</div>
+  <div>
+    <div class="grade-criteria-wrapper" *ngFor="let c of grade.criteria; let i = index">
+     <div class="grade-criteria">{{c.text}}</div>
+      <div class="grade-reyting-wrapper">
+        <div [class]="grades[i]===reting?'grade-empty-active':'grade-empty'"
+             (click)="setReting(i,j)"
+             *ngFor="let reting of reytings; let j = index">
+          {{reting}}
+        </div>
+      </div>
+    </div>
+    <div *ngIf="this.message" class="grade-message-error">{{this.message}}</div>
+    <div class="center">
+      <div class="btn" (click)="onClickGrade()">отправить</div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div *ngIf="game" class="standard-shadow game-card-wrapper">
+  <div class="game-card-title">{{game.title}}</div>
+  <div class="game-card-type">{{game.type}}</div>
+  <div class="game-card-date" *ngIf="game.dateGame">{{game.dateGame | date:"dd.MM.yyyy"}}</div>
+  <div class="center">
+    <hr>
+    <div class="game-card-type">код игры: <span class="game-code">{{game.code}}</span></div>
+    <div *ngIf="game.isAutoTeam">
+      <div class="qr"> <qr-code (click)="downloadQR(game.id)"
+                                [id]="'qr_'+game.id"
+                                [value]="getUrlGameAuth(game.code)" size="200" errorCorrectionLevel="M"></qr-code></div>
+      <div class="btn-green" (click)="downloadQR(game.id)">скачать QR</div>
+    </div>
+
+    <div *ngIf="!game.isAutoTeam" class="btn-green" (click)="generateQR()">сгенерировать QR</div>
+    <div *ngIf="isViewStatisticButton" class="btn-blue" (click)="viewStatistic()">статистика</div>
+    <hr>
+    <div class="btn" [routerLink]="['/','admin', game.id]">запустить</div>
+    <div class="btn-blue" (click)="toArchive()">отправить в архив</div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div *ngIf="game" class="standard-shadow game-card-wrapper">
+  <div class="game-card-title">{{game.title}}</div>
+  <div class="game-card-type">{{game.type}}</div>
+  <div class="game-card-date" *ngIf="game.dateGame">{{game.dateGame | date:"dd.MM.yyyy"}}</div>
+  <div class="center">
+    <hr>
+    <div *ngIf="isViewStatisticButton" class="btn-blue" (click)="viewStatistic()">статистика</div>
+    <div class="btn-green" (click)="toArchive()">сделать активной</div>
+  </div>
+</div>

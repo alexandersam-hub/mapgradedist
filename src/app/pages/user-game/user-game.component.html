@@ -1,0 +1,88 @@
+<div *ngIf="gameInfo">
+  <app-header [logo]="gameInfo.logoImg" [color]="gameInfo.basicColor"></app-header>
+  <div [style]="gameInfo.image?{'background-image' : 'url('+urlImage+gameInfo.image+')'}:{}" class="background">
+    <div class="user-game-wrapper">
+      <div *ngIf="!gameInfo.isPause" class="content">
+        <img (click)="viewModalInfo()" class="user-game-user-ico" src="../../../assets/svg/user.svg" alt="user">
+        <div class="user-game-title" *ngIf="gameInfo.isViewTitle">{{gameInfo.titleGame}}</div>
+        <div class="user-game-border" *ngIf="gameInfo.isViewTitle"></div>
+        <div class="timer-wrapper"
+             *ngIf="(gameInfo.task && gameInfo.task.type !== 'start') && (gameInfo.task && gameInfo.task.type !== 'finish')">
+          <app-timer *ngIf="time || time === 0" [time]="time"></app-timer>
+        </div>
+
+        <div *ngIf="gameInfo && gameInfo.task" [ngSwitch]="gameInfo.task.type">
+          <app-start-task *ngSwitchCase="'start'" [startText]="gameInfo.task.description" [img]="gameInfo.task.img??''"/>
+          <app-task *ngSwitchCase="'single'" [title]="gameInfo.task.localTitle??gameInfo.task.title" [description]="gameInfo.task.description" [img]="gameInfo.task.img??''"/>
+          <app-task *ngSwitchCase="'double'" [title]="gameInfo.task.localTitle??gameInfo.task.title" [description]="gameInfo.task.description" [img]="gameInfo.task.img??''"/>
+          <app-start-task *ngSwitchCase="'finish'" [startText]="gameInfo.task.description" [img]="gameInfo.task.img??''"/>
+        </div>
+        <div *ngIf="gameInfo.map && !gameInfo.grade && gameInfo.isStart"><img src="../../../assets/svg/map.svg" alt="" (click)="setViewMap()" class="user-game-map-ico"></div>
+        <div *ngIf="gameInfo && gameInfo.grade">
+          <app-grade [grade]="gameInfo.grade.grade" (chooseGradeEmit)="chooseGrade($event)"/>
+        </div>
+      </div>
+      <app-modal-info *ngIf="gameInfo.isPause">
+        <div class="message-pause-game">игра на паузе</div>
+      </app-modal-info>
+    </div>
+  </div>
+  <app-modal-info *ngIf="isViewUserInfo">
+    <div class="user-game-border"></div>
+    <div class="user-game-game-info">
+      <div *ngIf="teamCode!==null">команда: <span class="user-game-game-info-item">{{teamCode + 1}}</span></div>
+      <div *ngIf="stringType">тип испытаний: <span class="user-game-game-info-item">{{stringType}}</span></div>
+    </div>
+    <div class="user-game-border"></div>
+    <div class="user-game-game-info center" *ngIf="gameInfo.isDouble">
+      <div>сменить тип испытаний</div>
+      <div (click)="sendTypeUser()" class="btn-green">изменить на {{stringType==='одиночные'?'парные':'одиночные'}}</div>
+      <div class="user-game-border"></div>
+    </div>
+
+    <div class="center">
+      <div class="btn" (click)="closeModalInfo()">закрыть</div>
+    </div>
+  </app-modal-info>
+
+  <app-modal-info *ngIf="isGetUserInfo && userGradeInfo">
+    <div class="title-user-info">Заполните данные</div>
+    <hr>
+    <div class="title-user-info">пол</div>
+    <select [(ngModel)]="userGradeInfo.gender">
+      <option disabled value="-">выберите пол</option>
+      <option value="мужской">мужской</option>
+      <option value="женский">женский</option>
+    </select>
+    <div class="title-user-info">возраст</div>
+    <select [(ngModel)]="userGradeInfo.age">
+      <option disabled value="-">выберите возраст</option>
+      <option value="10-20">10-20</option>
+      <option value="20-30">20-30</option>
+      <option value="30-40">30-40</option>
+      <option value="40-50">40-50</option>
+      <option value="50-60">50-60</option>
+      <option value=">60+">60+</option>
+    </select>
+    <hr>
+    <div class="center">
+      <div class="message-user-info">{{messageUserInfo}}</div>
+      <div class="btn-green" (click)="sendUserGradeInfo()">отправить</div>
+    </div>
+  </app-modal-info>
+</div>
+<app-modal-info *ngIf="isError">
+  <div class="error-message-text">{{message}}</div>
+  <div class="message-pause-game message-additional-text">обратитесь к игротехнику за помощью</div>
+  <div class="center link-auth"><a [routerLink]="['/', 'authorization']">перейти к странице авторизации</a></div>
+</app-modal-info>
+
+<app-modal-info *ngIf="gameInfo && gameInfo.map && isViewMap" class="center">
+  <img [src]="mapImgUrl+gameInfo.map" alt="" class="user-game-map">
+  <div class="btn" (click)="setViewMap()">закрыть</div>
+
+</app-modal-info>
+
+<div *ngIf="!isLoad">
+  <app-loader></app-loader>
+</div>

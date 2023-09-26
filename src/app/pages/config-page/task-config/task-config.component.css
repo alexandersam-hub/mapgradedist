@@ -1,0 +1,39 @@
+.message-modal{
+  font-size: 22px;
+  text-align: center;
+  font-weight: 600;
+  margin: 10px 0;
+}
+.type-task-title{
+  width: 90%;
+  max-width: 300px;
+  display: block;
+  margin: 10px auto;
+  border: 2px solid var(--base-dark-color);
+  padding: 10px;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+}
+.filter-table{
+  margin: 10px;
+}
+.filter-item{
+  background-color: var(--second-orange-color);
+  color: white;
+  font-weight: 600;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.filter-checkbox{
+  width: 10px;
+  vertical-align: middle;
+}
+.message-not-task{
+  font-size: 24px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--base-dark-color);
+}

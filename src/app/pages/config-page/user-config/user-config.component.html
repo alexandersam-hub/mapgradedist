@@ -1,0 +1,35 @@
+<div class="user-config-wrapper">
+  <div *ngIf="isLoad; else loader">
+    <div *ngIf="users && users.length > 0; else nullUser">
+      <app-user-card-config
+        *ngFor="let user of users"
+        [user]="user"
+        (deleteUser$)="deleteRequestUser($event)"
+        (saveUser$)="saveUser($event)"/>
+    </div>
+    <ng-template #nullUser>
+      <div class="message-not-user">нет пользователей</div>
+    </ng-template>
+    <div class="btn" (click)="addNewUser()">Добавить пользователя</div>
+  </div>
+
+  <ng-template #loader>
+    <app-loader/>
+  </ng-template>
+
+
+  <div *ngIf="isViewConfirmWindow">
+    <app-modal-window class="center">
+      <div class="message-modal">Удалить пользователя?</div>
+      <div class="btn" (click)="deleteUser()">Да</div>
+      <div class="btn" (click)="cancelModalWindow()">Отмена</div>
+    </app-modal-window>
+  </div>
+  <div *ngIf="isViewInformer">
+    <app-modal-window class="center">
+      <div  class="message-modal" *ngIf="isError">Ошибка!</div>
+      <div class="message-modal">{{message}}</div>
+      <div class="btn" (click)="cancelModalInformer()">Закрыть</div>
+    </app-modal-window>
+  </div>
+</div>

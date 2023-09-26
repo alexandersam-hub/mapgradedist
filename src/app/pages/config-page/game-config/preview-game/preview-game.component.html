@@ -1,0 +1,20 @@
+<div *ngIf="game" class="preview-game-wrapper" [style]="game.image?{'background-image' : 'url('+urlImage+game.image+')'}:{}">
+  <app-header [logo]="game.logoImg" [color]="game.color"></app-header>
+  <div class="wrapper-user-ico">
+    <img class="user-game-user-ico" src="../../../../../../assets/svg/user.svg" alt="user">
+  </div>
+ <div class="preview-content">
+   <div *ngIf="game.isViewTitleUser">
+     <div class="preview-title-game">{{game.title}}</div>
+     <div class="line"></div>
+   </div>
+
+   <div *ngIf="game.isUserTimerView" class="preview-timer-wrapper">
+     <app-timer [time]="600"></app-timer>
+   </div>
+   <div class="preview-task-name">Название задания</div>
+   <div class="preview-task-description">Описание задания</div>
+ </div>
+</div>
+
+<div class="center"><div class="btn" (click)="close()">закрыть предпросмотр</div></div>

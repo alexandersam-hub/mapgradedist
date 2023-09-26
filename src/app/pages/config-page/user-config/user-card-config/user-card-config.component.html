@@ -1,0 +1,26 @@
+<div class="user-card-config-wrapper">
+  <div *ngIf="user">
+    <div class="marker-new" *ngIf="user.id === 'new'">новый несохраненный пользователь</div>
+    <div class="title-field">Логин</div>
+    <input class="change-field" type="text" (ngModelChange)="changeField()" [(ngModel)]="user.login" placeholder="логин">
+    <div class="title-field">Пароль</div>
+    <input class="change-field" type="text" (ngModelChange)="changeField()"  [(ngModel)]="user.password" placeholder="пароль">
+    <div class="title-field">Роль</div>
+    <select class="change-field" (ngModelChange)="changeField()" [(ngModel)]="user.role">
+      <option [value]="roles.admin">игротехник</option>
+      <option [value]="roles.super">администратор</option>
+    </select>
+    <div class="title-field">Имя пользователя</div>
+    <input class="change-field" (ngModelChange)="changeField()" type="text" [(ngModel)]="user.stringName" placeholder="имя пользовтеля">
+    <div class="center" *ngIf="user.id!=='new'">
+      <qr-code (click)="downloadQR(user.login)"
+               [id]="'qr_'+user.login"
+               [value]="getUrl(user.login, user.password)" size="200" errorCorrectionLevel="M"></qr-code>
+      <div (click)="downloadQR(user.login)" class="btn-green">скачать QR</div>
+      <hr>
+    </div>
+
+    <div class="btn" (click)="deleteUser()">удалить</div>
+    <div class="btn-green" *ngIf="isChanged" (click)="saveUser()">сохранить</div>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+.user-game-user-ico{
+  width: 40px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+.game-progress-title{
+  /*padding: 10px 0 0 10px;*/
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.68);
+}
+.map-image{
+  width: 90%;
+  max-width: 400px;
+}
+.game-progress-time,
+.game-progress-type{
+  /*padding: 0 0 0 10px;*/
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.49);
+}
+.game-progress-time{
+  text-align: right;
+}
+.control-game{
+  margin-top: 20px;
+  text-align: center;
+}
+.game-info,
+.game-date{
+  display: inline-block;
+  vertical-align: middle;
+  width: 60%;
+
+}
+
+.game-date{
+  text-align: center;
+  width: 40%;
+}
+.game-info-start-game{
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.timer{
+  margin-top: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+.round-title{
+  font-size: 16px;
+}
+.map-wrapper{
+  margin-top: 20px;
+}
+.map-title{
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+.code-game-text{
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.68);
+}
+select{
+  font-size: 20px;
+  padding: 10px 5px;
+  margin: 5px 10px;
+  min-height: 25px;
+  min-width: 150px;
+}
+.grade-table-wrapper{
+  margin: 20px 10px;
+}
+.grade-char-wrapper{
+  width: 90%;
+  max-width: 700px;
+  margin: 20px auto;
+}
+.error-message{
+  font-size: 18px;
+  font-weight: 600;
+}
+.view-table-name-text{
+
+}
+.margin-bottom{
+  margin-bottom: 10px;
+}
+.check-view-table-name{
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.loader-game-wrapper{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top:0;
+  left:0;
+  background-color: rgba(255, 255, 255, 0.55);
+}

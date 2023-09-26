@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class="wrapper-auth">
+  <div *ngIf="!isChoiceTeam && !isChoiceTypeGamer">
+    <div class="title-auth">Авторизации</div>
+    <div class="form-auth">
+      <div class="standard-shadow">
+        <div>Вход для администратора</div>
+        <input type="text" placeholder="логин" [(ngModel)]="loginData.login">
+        <input type="text" placeholder="пароль" [(ngModel)]="loginData.password">
+        <div class="error-message" *ngIf="errorMessage">{{errorMessage}}</div>
+        <div class="btn" (click)="login()">Войти</div>
+      </div>
+      <div class="standard-shadow enter-gamer">
+        <div>Вход для игрока</div>
+        <input type="number" placeholder="код игры" [(ngModel)]="codeGame">
+        <div class="error-message" *ngIf="errorMessageGamer">{{errorMessageGamer}}</div>
+        <div class="btn" (click)="loginGamer()">Войти</div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isChoiceTeam">
+    <div class="title-auth">выберите команду</div>
+    <div class="choice-team" *ngFor="let i of teams" (click)="choiceTeam(i)">команда {{i+1}}</div>
+  </div>
+  <div *ngIf="isChoiceTypeGamer">
+    <div class="title-auth" >выберите тип испытаний</div>
+    <div class="choice-team" (click)="choiceTypeGamer('single')">одиночные</div>
+    <div class="choice-team" (click)="choiceTypeGamer('double')">парные</div>
+  </div>
+</div>

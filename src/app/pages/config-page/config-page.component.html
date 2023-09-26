@@ -1,0 +1,31 @@
+<app-header></app-header>
+<div class="choice-config-wrapper">
+  <img [routerLink]="['../','admin']" class="user-game-user-ico" src="../../../assets/svg/back.svg" alt="user">
+  <img (click)="goToBottomPage()" class="config-game-down-ico" src="../../../assets/svg/down.svg" alt="down">
+
+  <div [class]="currentPage==='user'?'active-item-link':'item-link'" (click)="setActivePage('user')">Пользователи</div>
+  <div [class]="currentPage==='task'?'active-item-link':'item-link'" (click)="setActivePage('task')">Испытания</div>
+  <div [class]="currentPage==='grade'?'active-item-link':'item-link'" (click)="setActivePage('grade')">Опросы</div>
+  <div [class]="currentPage==='type-game'?'active-item-link':'item-link'" (click)="setActivePage('type-game')">Типы игр</div>
+  <div [class]="currentPage==='game'?'active-item-link':'item-link'" (click)="setActivePage('game')">Игры</div>
+
+  <div *ngIf="currentPage==='user'">
+    <app-user-config />
+  </div>
+
+  <div *ngIf="currentPage==='task'">
+    <app-task-config />
+  </div>
+
+  <div *ngIf="currentPage==='grade'">
+    <app-grade-config />
+  </div>
+
+  <div *ngIf="currentPage==='game'">
+    <app-game-config />
+  </div>
+  <div *ngIf="currentPage==='type-game'">
+    <app-type-game />
+  </div>
+
+</div>

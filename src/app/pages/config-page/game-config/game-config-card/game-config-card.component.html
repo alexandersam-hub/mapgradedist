@@ -1,0 +1,252 @@
+<div class="game-card-config-wrapper" *ngIf="game && !isPreviewPage">
+  <div class="standard-shadow">
+    <div class="game-card-config-title">тип игры</div>
+    <select [(ngModel)]="game.type">
+      <option value="" disabled>не задано</option>
+      <option [value]="tg.type" *ngFor="let tg of typesGames">{{tg.type}}</option>
+    </select>
+  </div>
+  <div class="standard-shadow">
+    <div class="game-card-config-title">заголовок</div>
+    <input type="text" [(ngModel)]="game.title" placeholder="название игры">
+  </div>
+  <div class="standard-shadow">
+    <div class="game-card-config-title">дата игры</div>
+    <input type="date" [(ngModel)]="game.dateGame" placeholder="дата">
+  </div>
+  <div class="standard-shadow">
+    <div class="game-card-config-title">количество команд</div>
+    <input type="number" [(ngModel)]="game.countTeam" placeholder="количество игроков">
+  </div>
+  <div class="standard-shadow">
+    <div class="game-card-config-title">время раунда (в минутах)</div>
+    <input type="number" [(ngModel)]="game.timeRound" placeholder="время раунда">
+  </div>
+  <div class="standard-shadow">
+    <div class="game-card-config-title">цветовая схема шапки сайта</div>
+    <input class="check-color" [(colorPicker)]="game.color" [style.background]="game.color" placeholder="кликни, чтобы выбрать цвет"/>
+    <div class="game-card-config-title">код цвета</div>
+    <input type="text" [(ngModel)]="game.color">
+  </div>
+
+  <div class="standard-shadow">
+    <div class="game-card-config-title">задний фон игры</div>
+    <img class="game-card-config-img" *ngIf="game.image" [src]="imgUrl + game.image">
+    <div *ngIf="game.image">
+      <hr>
+      <div class="game-card-config-title">добавить новый файл</div>
+    </div>
+    <input class="btn" id="file_img" type="file" (change)="loadImage($event, 'game')"/>
+  </div>
+
+  <div class="standard-shadow">
+    <div class="game-card-config-title">логотип компании</div>
+    <img class="game-card-config-img" *ngIf="game.logoImg" [src]="logoImgUrl + game.logoImg">
+    <div *ngIf="game.image">
+      <hr>
+      <div class="game-card-config-title">добавить новый файл</div>
+    </div>
+    <input class="btn" id="logo_img" type="file" (change)="loadImage($event, 'logo')"/>
+  </div>
+
+  <div class="standard-shadow">
+    <div class="game-card-config-title">карта испытаний</div>
+    <div *ngIf="game.mapImg">
+      <img class="game-card-config-img" [src]="mapImgUrl + game.mapImg" alt="">
+      <hr>
+      <div class="game-card-config-title">добавить новый файл</div>
+    </div>
+    <input class="btn" id="map_img" type="file" (change)="loadImage($event, 'map')"/>
+  </div>
+
+  <div class="standard-shadow">
+    <div class="game-card-config-title">шаблон игры</div>
+    <div class="standard-shadow task-template-title" *ngFor="let t of game.templateGame; let i = index">
+      <div *ngIf="t.type === 'task'">{{i + 1}}. испытание {{t.index + 1}}</div>
+      <div *ngIf="t.type === 'start'">{{i + 1}}. старт</div>
+      <div *ngIf="t.type === 'finish'">{{i + 1}}. финиш</div>
+      <div *ngIf="t.type === 'grade'">
+        {{i + 1}}. Опрос
+        <select name="" id="" [(ngModel)]="t.target">
+          <option value="">-</option>
+          <option *ngFor="let grade of grades" [value]="grade.id">{{grade.title}}</option>
+        </select>
+        <span *ngIf="i<game.templateGame.length-1" class="btn" (click)="downItemTemplate(i)">↓</span>
+        <span *ngIf="i>0" class="btn" (click)="upItemTemplate(i)">↑</span>
+      </div>
+      <div *ngIf="t.type !== 'start' && t.type !== 'finish'" class="btn" (click)="deleteItemTemplate(i)">удалить</div>
+    </div>
+    <div class="btn" (click)="addTemplateTask()">добавить испытание</div>
+    <div class="btn" (click)="addTemplateGrade()">добавить опрос</div>
+  </div>
+
+  <div class="standard-shadow">
+    <div class="game-card-config-title">есть парные испытания <input class="checkbox" type="checkbox"
+                                                                     [(ngModel)]="game.isDouble"></div>
+  </div>
+  <div class="standard-shadow">
+    <div class="game-card-config-title">в опросах спрашивать пол и возраст <input class="checkbox" type="checkbox"
+                                                                                  [(ngModel)]="game.isRequestUserGradeInfo">
+    </div>
+  </div>
+  <div class="standard-shadow">
+    <div class="game-card-config-title">показывать таймер игрокам <input class="checkbox" type="checkbox"
+                                                                         [(ngModel)]="game.isUserTimerView"></div>
+  </div>
+  <div class="standard-shadow">
+    <div class="game-card-config-title">показывать заголовок игрокам<input class="checkbox" type="checkbox"
+                                                                           [(ngModel)]="game.isViewTitleUser"></div>
+  </div>
+  <div class="standard-shadow">
+    <div class="game-card-config-title">автоматическое распределение на команды <input class="checkbox" type="checkbox"
+                                                                                       [(ngModel)]="game.isAutoTeam">
+    </div>
+  </div>
+  <div class="standard-shadow">
+    <div class="game-card-config-title">администратор игры</div>
+    <div *ngIf="masterUser">{{masterUser.login}}: {{masterUser.stringName}}</div>
+    <div *ngIf="!masterUser">пользователь не указан</div>
+    <div class="btn" (click)="viewUsers()">выбрать</div>
+    <div [class]="isViewUsers?'open':'close'">
+      <div *ngFor="let user of adminUsers" (click)="choiceMaster(user)"
+           [class]="game.master && game.master === user.id ? 'user-view-card-active':'user-view-card'">
+        <div>{{user.login}}</div>
+        <div *ngIf="user.stringName">{{user.stringName}}</div>
+      </div>
+      <!--      <div class="btn">добавить администратора</div>-->
+      <div class="btn" (click)="viewUsers()">закрыть</div>
+    </div>
+  </div>
+
+  <div class="standard-shadow">
+    <div class="game-card-config-title">испытания</div>
+    <div>Выбрано испытаний: {{game.tasksSingle.length}} </div>
+    <div class="btn" (click)="viewTasks()">изменить</div>
+    <div [class]="isViewTasks?'open':'close'">
+      <div *ngIf="tasks.length === 0">Нет испытаний</div>
+      <div *ngIf="game.isDouble">одиночные</div>
+      <div *ngFor="let task of tasks">
+        <div [class]="isSelectTask(task) ?'task-view-card-active':'task-view-card'"
+             *ngIf="task.type === 'single'"
+             (click)="choiceTask(task)">{{task.title}}</div>
+      </div>
+      <div *ngIf="game.isDouble">
+        <div>парные</div>
+        <div *ngFor="let task of tasks">
+          <div [class]="isSelectTask(task) ?'task-view-card-active':'task-view-card'"
+               *ngIf="task.type === 'double'"
+               (click)="choiceTask(task)">{{task.title}}</div>
+        </div>
+      </div>
+      <div *ngIf="game.isDouble">ожидание</div>
+      <div *ngFor="let task of tasks">
+        <div [class]="isSelectTask(task) ?'task-view-card-active':'task-view-card'"
+             *ngIf="task.type === 'await'"
+             (click)="choiceTask(task)">{{task.title}}</div>
+      </div>
+      <div class="btn" (click)="viewTasks()">закрыть</div>
+    </div>
+  </div>
+
+  <div class="standard-shadow">
+    <div class="game-card-config-title">Название испытыний и картинки для заданий</div>
+    <div class="standard-shadow">
+      <div class="game-card-config-title">Стартовая фраза</div>
+      <textarea class="game-config-textarea" [(ngModel)]="game.descriptionsTasks.start.text"
+                placeholder="стартовая фраза"
+                rows="3"></textarea>
+
+      <div class="game-card-config-title">картинка</div>
+      <div *ngIf="game.descriptionsTasks.start.img">
+        <img class="game-card-config-img" [src]="taskImgUrl + game.descriptionsTasks.start.img" alt="">
+        <hr>
+        <div class="game-card-config-title">добавить новый файл</div>
+      </div>
+      <input class="btn" type="file" (change)="loadImage($event, 'task', {type: 'start', index: -1})"/>
+    </div>
+    <div class="standard-shadow">
+      <div class="game-card-config-title">Финальная фраза</div>
+      <textarea class="game-config-textarea" [(ngModel)]="game.descriptionsTasks.finish.text"
+                placeholder="финальная фраза"
+                rows="3"></textarea>
+
+      <div class="game-card-config-title">картинка</div>
+      <div *ngIf="game.descriptionsTasks.finish.img">
+        <img class="game-card-config-img" [src]="taskImgUrl + game.descriptionsTasks.finish.img" alt="">
+        <hr>
+        <div class="game-card-config-title">добавить новый файл</div>
+      </div>
+      <input class="btn" type="file" (change)="loadImage($event, 'task', {type: 'finish', index: -1})"/>
+    </div>
+    <div (click)="setViewTaskTitle()" class="btn">изменить в заданиях</div>
+    <div  [class]="isViewTaskTitle?'open':'close'">
+      <div class="standard-shadow" *ngFor="let task of game.descriptionsTasks.task; let i = index">
+        <div class="game-card-config-title">задание: {{getTitleTask(task.taskId)}}</div>
+        <div class="game-card-config-title">название, видимое игрокам</div>
+        <input type="text" [(ngModel)]="task.title" placeholder="название, видимое игрокам">
+        <div class="game-card-config-title">картинка</div>
+        <div *ngIf="task.img">
+          <img class="game-card-config-img" [src]="taskImgUrl + task.img" alt="">
+          <hr>
+          <div class="game-card-config-title">добавить новый файл</div>
+        </div>
+        <input class="btn" type="file" (change)="loadImage($event, 'task', {type: 'task', index: i})"/>
+      </div>
+      <div (click)="setViewTaskTitle()" class="btn">закрыть</div>
+    </div>
+  </div>
+
+  <div class="standard-shadow">
+    <div class="game-card-config-title">маршруты</div>
+    <div> Количество команд: {{game.countTeam }}; раундов: {{countRound}}; количество одиночных
+      испытаний: {{game.tasksSingle.length}}; <span
+        *ngIf="game.isDouble">количество парных испытаний: {{game.tasksDouble.length}}</span></div>
+    <div class="game-card-config-title" *ngIf="game.isDouble">одиночные</div>
+    <div class="team-map-card" *ngFor="let singleTask of game.maps.singleMap; let teamNumber = index">
+      <div>команда: {{teamNumber + 1}}</div>
+      <div *ngFor="let t of singleTask; let i = index">
+        <div>{{i + 1}}
+          <select [(ngModel)]="singleTask[i]">
+            <option [value]="j"
+                    *ngFor="let task of game.tasksSingle; let j = index">{{getTitleTask(game.tasksSingle[j])}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="game-card-config-title" *ngIf="game.isDouble">парные</div>
+    <div class="team-map-card" *ngFor="let doubleTask of game.maps.doubleMap; let teamNumber = index">
+      <div>команда: {{teamNumber + 1}}</div>
+      <div *ngFor="let t of doubleTask; let position = index">
+        <div>{{position + 1}}
+          <select [(ngModel)]="doubleTask[position]">
+            <option [value]="i"
+                    *ngFor="let task of game.tasksDouble; let i = index">{{getTitleTask(game.tasksDouble[i])}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="countRound !== game.tasksSingle.length || (game.isDouble && (countRound/2 !== game.tasksDouble.length)); else taskMap">
+      Количество испытаний не соответствует количесву раундов
+    </div>
+    <ng-template #taskMap>
+      <div class="btn" (click)="createMapForTeam()">создать маршрутные листы</div>
+    </ng-template>
+  </div>
+  <br>
+  <div class="btn-green" (click)="saveGame()">Сохранить</div>
+  <div class="btn" (click)="cancel()">Закрыть</div>
+  <div class="btn-blue" (click)="setIsPreview()">Предпросмотр</div>
+</div>
+<div *ngIf="isViewInformer">
+  <app-modal-window>
+    <div *ngIf="isError">Ошибка.</div>
+    <div class="message-modal">{{message}}</div>
+    <div class="center">
+      <div class="btn" (click)="cancelModalInformer()">закрыть</div>
+    </div>
+  </app-modal-window>
+</div>
+<div *ngIf="isPreviewPage && game">
+  <app-preview-game [game]="game" (closeEmit)="setIsPreview()"></app-preview-game>
+</div>

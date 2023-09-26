@@ -1,0 +1,10 @@
+.login-qr-message{
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--base-dark-color);
+  margin: 20px;
+}
+.link-auth{
+  font-size: 22px;
+}

@@ -1,0 +1,35 @@
+.choice-config-wrapper{
+
+}
+.active-item-link,
+.item-link{
+  display: inline-block;
+  border: 2px solid #000000;
+  padding: 2px 5px;
+  margin: 2px 5px;
+  width: 120px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.active-item-link{
+  background-color: var(--base-second-color);
+  color: white;
+}
+.user-game-user-ico{
+  width: 40px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+.config-game-down-ico{
+  width: 40px;
+  position: fixed;
+  right: 10px;
+  bottom: 20px;
+  cursor: pointer;
+  opacity: 0.2;
+}

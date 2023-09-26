@@ -1,0 +1,10 @@
+.table-qr{
+  margin: 10px  auto;
+}
+.wrapper{
+  vertical-align: middle;
+}
+.qr{
+  display: inline-block;
+  vertical-align: middle;
+}

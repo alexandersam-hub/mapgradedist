@@ -1,0 +1,13 @@
+<div class="config-type-game-wrapper" *ngIf="isLoad; else loader">
+  <app-type-game-card *ngFor="let t of types; let i = index" [typeGame]="t" >
+    <div class="center">
+      <div class="btn" (click)="deleteTypeGame(i)">удалить</div>
+      <div class="btn-green" (click)="saveTypeGame(i)">сохранить</div>
+    </div>
+  </app-type-game-card>
+  <div class="btn" (click)="addEmptyTypeGame()">добавить тип игры</div>
+</div>
+
+<ng-template #loader>
+  <app-loader />
+</ng-template>

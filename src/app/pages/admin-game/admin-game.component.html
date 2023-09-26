@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div class="admin-game-wrapper" *ngIf="isLoad; else noLoad">
+  <table *ngIf="countArchiveGame() > 0" class="filter-table">
+    <tr>
+      <td  class="filter-item">показать архивные игры</td>
+      <td  class="filter-item"> <input type="checkbox" [(ngModel)]="isArchiveView"></td>
+    </tr>
+  </table>
+  <div class="wrapper-btn-statistic">
+    <div class="btn" [routerLink]="['../','statistic']">общая статистика</div>
+  </div>
+  <img class="settings-ico" src="../../../assets/svg/settings.svg" alt=""  [routerLink]="['../','config']">
+  <div *ngIf="gameGenerateQr">
+    <app-generate-qr [game]="gameGenerateQr">
+      <div class="btn" (click)="closeGenerateQr()">закрыть</div>
+    </app-generate-qr>
+  </div>
+  <div *ngIf="gameStatisticView">
+    <app-statistic-component [game]="gameStatisticView">
+    <div class="center">
+      <div class="btn" (click)="closeStatistic()">закрыть</div>
+    </div>
+    </app-statistic-component>
+  </div>
+  <div *ngIf="!gameGenerateQr && !gameStatisticView">
+    <div class="message-not-game" *ngIf="countActiveGame() === 0">Нет доступных игр</div>
+    <div *ngFor="let game of games">
+      <app-game-card *ngIf="!game.isArchive" [game]="game"
+                      (toArchiveEmit)="toArchive($event)"
+                      (viewStatisticEmit)="viewStatistic($event)"
+                      (generateQrEmit)="setGameGenerateQr($event)"/>
+    </div>
+    <div  *ngIf="isArchiveView && countArchiveGame() > 0" >
+      <div class="title-archive-game">Архивные игры</div>
+      <div *ngFor="let game of games">
+        <app-game-card-archive *ngIf="game.isArchive" [game]="game"
+                       (toArchiveEmit)="toArchive($event)"
+                       (viewStatisticEmit)="viewStatistic($event)"/>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal-info *ngIf="isViewModal" class="center">
+  <div class="message-modal">{{message}}</div>
+  <div class="btn" (click)="closeModal()">закрыть</div>
+</app-modal-info>
+<ng-template #noLoad>
+  <app-loader/>
+</ng-template>

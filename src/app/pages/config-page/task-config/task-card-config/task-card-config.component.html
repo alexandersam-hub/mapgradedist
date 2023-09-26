@@ -1,0 +1,26 @@
+<div class="task-card-config-wrapper" *ngIf="task &&( filters.includes(task.type) || task.id === 'new'); else notTask">
+  <div *ngIf="task.id==='new'" class="center new-task">новое несохраненное испытание</div>
+  <div class="task-card-config-title-field">Тип испытания</div>
+  <select (ngModelChange)="changeField()" [(ngModel)]="task.type">
+    <option value="single">одиночное</option>
+    <option value="double">парное</option>
+    <option value="await">ожидание</option>
+  </select>
+
+  <div class="task-card-config-title-field">Название</div>
+  <input (ngModelChange)="changeField()"  type="text" [(ngModel)]="task.title">
+
+<!--  <div class="task-card-config-title-field">Длительность</div>-->
+<!--  <input (ngModelChange)="changeField()"  type="number" [(ngModel)]="task.duration">-->
+
+  <div class="task-card-config-title-field">Описание испытания</div>
+  <textarea class="task-config-textarea" (ngModelChange)="changeField()"  [(ngModel)]="task.description"> </textarea>
+
+  <div class="btn" (click)="deleteTask()">удалить</div>
+  <div class="btn-blue" (click)="copyTask()">копировать</div>
+  <div *ngIf="isChanged" class="btn-green" (click)="saveTask()">сохранить</div>
+  <div *ngIf="task.id==='new'" id="new-task"></div>
+</div>
+
+<ng-template #notTask>
+</ng-template>

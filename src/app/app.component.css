@@ -1,0 +1,14 @@
+.wrapper{
+  min-height: 100vh;
+
+  /*background: rgb(195,34,34);*/
+  /*background: rgb(255,0,0);*/
+  /*background: radial-gradient(circle, rgba(255, 0, 0, 0.18) 0%, rgba(255, 116, 0, 0.23) 9%, rgba(0, 252, 252, 0.1) 53%, rgba(255, 167, 0, 0.21) 100%);*/
+  background-color: white;
+  background-image: var(--standart-gradient);
+  /*background: linear-gradient(0deg, rgba(195, 34, 34, 0.2) 0%, rgba(0, 211, 255, 0.2) 52%, rgba(255, 170, 0, 0.32) 100%);*/
+}
+
+.content{
+
+}

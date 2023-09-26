@@ -1,0 +1,6 @@
+<div *ngIf="typeGame" class="type-game-card-wrapper">
+  <div *ngIf="typeGame.id === 'new'" class="marker-new">новый несохраненный тип игры</div>
+  <div class="title-field">Тип игры</div>
+  <input class="change-field"  placeholder="название типа игры" type="text" [(ngModel)]="typeGame.type">
+  <ng-content></ng-content>
+</div>

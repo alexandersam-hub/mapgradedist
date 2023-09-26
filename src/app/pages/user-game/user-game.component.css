@@ -1,0 +1,106 @@
+.user-game-wrapper {
+  padding: 10px;
+
+  /*background-color: rgba(255, 230, 232, 0.86);*/
+  /*background-color: rgba(183, 205, 255, 0.86);*/
+  min-height: calc(100vh - 84px);
+
+}
+.background{
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment:fixed;
+  min-height: calc(100vh - 84px);
+  width: 100%;
+}
+.content{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  min-height: 50vh;
+  background-color: rgba(255, 230, 232, 0.94);
+}
+.timer-wrapper{
+  text-align: right;
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.60);
+}
+.user-game-user-ico{
+  width: 40px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+.user-game-title {
+  text-align: right;
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.60);
+}
+.user-game-game-info{
+  font-size: 18px;
+
+}
+.user-game-game-info-item{
+  font-weight: 600;
+}
+.user-game-border {
+  margin: 10px 0;
+  border: 3px solid rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+.message-pause-game{
+  text-align: center;
+  color: var(--base-dark-color);
+  font-weight: 600;
+  font-size: 20px;
+}
+.error-message-text{
+  text-align: center;
+
+  font-size: 20px;
+}
+.title-user-info{
+  font-weight: 600;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.68);
+  width: 90%;
+  margin: auto;
+}
+.message-additional-text{
+  margin-top: 10px;
+}
+select{
+  display: block;
+  padding: 5px 10px;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  margin: 10px auto;
+  width: 90%;
+}
+.link-auth{
+  margin-top: 20px;
+}
+.message-user-info{
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--base-dark-color);
+}
+.user-game-map{
+  width: 80%;
+}
+.user-game-map-ico{
+  width: 30px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  padding: 5px;
+  background-color: #646B63;
+  border-radius: 50px;
+  cursor: pointer;
+}

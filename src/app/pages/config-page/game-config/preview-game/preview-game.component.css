@@ -1,0 +1,51 @@
+.preview-game-wrapper{
+  margin: 10px auto;
+  width: 90%;
+  max-width: 400px;
+  min-height: 500px;
+}
+.line{
+  margin: 10px 0;
+  border: 3px solid rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+.preview-content {
+  padding: 10px;
+  border-radius: 20px;
+  min-height: 240px;
+  background-color: rgba(255, 230, 232, 0.94);
+  margin: -24px 20px 20px 20px;
+}
+.preview-title-game{
+
+  text-align: right;
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.60);
+}
+.preview-task-name{
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.54);
+}
+.preview-task-description{
+  font-size: 18px;
+  font-weight: 600;
+  width: 90%;
+}
+.preview-timer-wrapper{
+  text-align: right;
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.60);
+}
+.wrapper-user-ico{
+  text-align: right;
+}
+.user-game-user-ico{
+  right: 10px;
+  top: -52px;
+  width: 40px;
+  position: relative;
+  cursor: pointer;
+}

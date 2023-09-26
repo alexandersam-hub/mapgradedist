@@ -1,0 +1,14 @@
+<div *ngIf="grade" class="grade-game-wrapper">
+  <div class="title-table">Опрос: {{grade.position+1}}</div>
+  <table>
+    <tr *ngIf="isViewTh">
+      <th>id</th>
+      <th *ngFor="let c of grade.grade.criteria">{{c.text}}</th>
+    </tr>
+    <tr *ngFor="let g of userGrades">
+      <td>{{g.code }}</td>
+      <td *ngFor="let c of g.answer">{{c}}</td>
+    </tr>
+  </table>
+</div>
+

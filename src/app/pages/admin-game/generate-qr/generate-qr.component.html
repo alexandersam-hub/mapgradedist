@@ -1,0 +1,25 @@
+<!--<div *ngFor="let data of urlDataList">-->
+<!--  команда: {{data.team + 1}}-->
+<!--  <qr-code (click)="downloadQR(data.team, data.type)" [id]="'qr_'+data.team+data.type" [value]="data.url" size="250"-->
+<!--           errorCorrectionLevel="M"></qr-code>-->
+<!--  <div class="btn-green" (click)="downloadQR(data.team, data.type)">скачать</div>-->
+<!--</div>-->
+
+<table class="table-qr" *ngIf="game && !game.isAutoTeam">
+  <tr>
+    <th>команда</th>
+    <th>qr</th>
+  </tr>
+  <tr *ngFor="let data of urlDataList">
+    <td>{{data.team + 1}}</td>
+    <td>
+      <div class="wrapper-qr-load">
+        <div class="qr"> <qr-code (click)="downloadQR(data.team)"
+                       [id]="'qr_'+data.team"
+                       [value]="data.singleUrl" size="200" errorCorrectionLevel="M"></qr-code></div>
+        <div class="btn-green wrapper-qr-load" (click)="downloadQR(data.team)">скачать</div>
+      </div>
+    </td>
+  </tr>
+</table>
+<ng-content></ng-content>

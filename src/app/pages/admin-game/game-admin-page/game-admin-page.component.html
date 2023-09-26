@@ -1,0 +1,108 @@
+<app-header></app-header>
+<div *ngIf="gameProgress">
+  <img [routerLink]="['../']" class="user-game-user-ico" src="../../../assets/svg/back.svg" alt="user">
+  <div class="standard-shadow">
+    <div class="game-info">
+      <div class="game-progress-title">{{gameProgress.game.title}}</div>
+      <div class="game-progress-type">{{gameProgress.game.type}}</div>
+      <div class="game-progress-type">код игры: <span class="code-game-text">{{gameProgress.game.code}}</span></div>
+    </div>
+    <div class="game-date">
+      <div class="game-progress-time"
+           *ngIf="gameProgress.game.dateGame">{{gameProgress.game.dateGame | date:"dd.MM.yyyy"}}</div>
+    </div>
+  </div>
+  <div class="standard-shadow timer" *ngIf="time!==undefined">
+    <div *ngIf="!gameProgress.isFinish && gameProgress.isStart">
+      <div class="round-title">{{gameProgress.currentRound + 1}} раунд</div>
+      <app-timer [time]="time"></app-timer>
+      <div *ngIf="gameProgress.isStart && !gameProgress.isFinish" class="btn-blue" (click)="sendNextRound()">завершть
+        раунд
+      </div>
+    </div>
+
+    <div *ngIf="gameProgress.isFinish">игра завершена</div>
+    <div *ngIf="!gameProgress.isStart && !gameProgress.isPause">игра остановлена</div>
+    <div *ngIf="gameProgress.isPause">игра на паузе</div>
+  </div>
+  <div class="standard-shadow timer">
+    <div>{{gameProgress.game.isUserTimerView ? 'игрокам показывается таймер' : 'игрокам не показывается таймер'}}</div>
+    <div (click)="sendControlTimer(!gameProgress.game.isUserTimerView)"
+         class="btn-blue">{{gameProgress.game.isUserTimerView ? 'не показывать' : 'показывать'}}</div>
+  </div>
+  <div class="standard-shadow control-game">
+    <div class="game-info-start-game">{{gameProgress.isStart ? 'игра запущена' : 'игра не запущена'}}</div>
+    <div class="btn-green" *ngIf="!gameProgress.isStart" (click)="startGame()">cтарт</div>
+    <div class="btn" *ngIf="gameProgress.isStart && !gameProgress.isFinish" (click)="stopGame()">cтоп</div>
+    <div class="btn" *ngIf="!gameProgress.isStart || gameProgress.isFinish" (click)="requestRefreshGame()">cброс</div>
+  </div>
+
+
+  <div class="standard-shadow map-wrapper">
+    <div class="map-title">одиночные</div>
+    <app-team-map-view [teamMap]="gameProgress.roundGame.singleTasks"/>
+  </div>
+
+  <div *ngIf="gameProgress.game.isDouble" class="standard-shadow map-wrapper">
+    <div class="map-title">парные</div>
+    <app-team-map-view [teamMap]="gameProgress.roundGame.doubleTasks"/>
+  </div>
+  <div *ngIf="grades.length > 0" class="standard-shadow grade-table-wrapper">
+    <div class="margin-bottom">
+      <span class="view-table-name-text">показывать залоговки таблиц </span><input class="check-view-table-name" type="checkbox" [(ngModel)]="isViewTh">
+    </div>
+     <app-grade-game *ngFor="let grade of grades" [grade]="grade" [isViewTh]="isViewTh"/>
+
+  </div>
+  <div *ngIf="grades.length > 0" class="grade-char-wrapper standard-shadow">
+    <app-grade-char [grades]="grades"/>
+  </div>
+
+
+  <div class="btn" (click)="generateQR()">{{isGenerateQR ? 'закрыть' : 'сгенерировать QR'}}</div>
+
+ <div class="center standard-shadow" *ngIf="gameProgress.game.mapImg">
+   <div class="game-info-start-game">карта игры</div>
+  <div><img [src]="mapImUrl+gameProgress.game.mapImg" alt="" class="map-image"></div>
+ </div>
+
+  <div class="center" *ngIf="isGenerateQR">
+    <div class="center">
+      <select (change)="generateUrlQR()" *ngIf="qrData" [(ngModel)]="qrData.teamNumber">
+        <option *ngFor="let t of gameProgress.roundGame.singleTasks; let i = index" [value]="i">
+          команда {{i + 1}}
+        </option>
+      </select>
+      <select (change)="generateUrlQR()" *ngIf="qrData" [(ngModel)]="qrData.type">
+        <option value="single">
+          одиночные
+        </option>
+        <option value="double">
+          парные
+        </option>
+      </select>
+    </div>
+    <qr-code (click)="downloadQR()" id="qr" [value]="urlQr" size="300" errorCorrectionLevel="M"></qr-code>
+  </div>
+</div>
+
+<!--<qrcode-svg (click)="downloadQR()" id="qr" value="hello world!"></qrcode-svg>-->
+<div *ngIf="isError" class="center">
+  <app-modal-info>
+    <div class="error-message">{{message}}</div>
+    <div class="btn" (click)="closeModalInformer()">закрыть</div>
+  </app-modal-info>
+</div>
+
+<div *ngIf="isViewConfirmRefresh" class="center">
+  <app-modal-info>
+    <div class="error-message">Сбросить игру? Все данные по текущей игре будут удалены.</div>
+    <div class="btn-green" (click)="refreshGame()">да</div>
+    <div class="btn" (click)="closeConfirmWindow()">отмена</div>
+  </app-modal-info>
+</div>
+
+<div *ngIf="!isLoad">
+  <div class="loader-game-wrapper"><app-loader/></div>
+
+</div>

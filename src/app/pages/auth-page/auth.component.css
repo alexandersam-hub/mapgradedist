@@ -1,0 +1,48 @@
+.wrapper-auth{
+  min-width: 150px;
+  margin: 0 auto;
+  padding: 30px;
+
+  font-style: normal;
+  text-align: center;
+  font-weight: 800;
+  font-size: 16px;
+  width: 80%;
+  max-width: 320px;
+}
+.title-auth{
+  font-size: 32px;
+  color: rgba(0, 0, 0, 0.77);
+  margin-bottom: 30px;
+}
+.choice-team{
+  font-size: 20px;
+  width: 90%;
+  max-width: 200px;
+  margin: 20px auto;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+.enter-gamer{
+  margin-top: 20px;
+}
+.wrapper-auth input {
+  background: #ffffff;
+  display: block;
+  border: 3px solid rgba(0, 0, 0, 0.77);
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 16px;
+  max-width: 300px;
+  width: 90%;
+  height: 40px;
+  padding-left: 20px;
+  margin: 20px auto;
+  text-align: left;
+}
+.error-message{
+  margin-bottom: 10px;
+}

@@ -1,0 +1,66 @@
+<div class="task-config-wrapper">
+  <div *ngIf="isLoad; else loader">
+
+    <table class="filter-table">
+      <tr>
+        <td (click)="addFilter('single')" class="filter-item">одиночные <input [checked]="filters.includes('single')" class="filter-checkbox" type="checkbox"></td>
+        <td (click)="addFilter('double')" class="filter-item">парные <input [checked]="filters.includes('double')" class="filter-checkbox" type="checkbox"></td>
+        <td (click)="addFilter('await')" class="filter-item">ожидание <input [checked]="filters.includes('await')" class="filter-checkbox" type="checkbox"></td>
+      </tr>
+
+    </table>
+
+    <div *ngIf="tasks && tasks.length > 0; else nullTask">
+      <div class="type-task-title" *ngIf="filters.includes('single')">одиночные</div>
+      <app-task-card-config
+        [filters]="filters"
+        *ngFor="let task of getTasksByType('single')"
+        [task]="task"
+        (deleteTaskEmitter)="deleteRequestTask($event)"
+        (copyTaskEmitter)="copyTask($event)"
+        (saveTaskEmitter)="saveTask($event)"/>
+      <div class="type-task-title" *ngIf="filters.includes('double')">парные</div>
+      <app-task-card-config
+        [filters]="filters"
+        *ngFor="let task of getTasksByType('double')"
+        [task]="task"
+        (deleteTaskEmitter)="deleteRequestTask($event)"
+        (copyTaskEmitter)="copyTask($event)"
+        (saveTaskEmitter)="saveTask($event)"/>
+      <div class="type-task-title" *ngIf="filters.includes('await')">ожидание</div>
+      <app-task-card-config
+        [filters]="filters"
+        *ngFor="let task of getTasksByType('await')"
+        [task]="task"
+        (deleteTaskEmitter)="deleteRequestTask($event)"
+        (copyTaskEmitter)="copyTask($event)"
+        (saveTaskEmitter)="saveTask($event)"/>
+    </div>
+    <ng-template #nullTask>
+      <div class="message-not-task">нет испытаний</div>
+    </ng-template>
+    <div class="btn" (click)="addNewTask()">добавить испытание</div>
+  </div>
+
+  <ng-template #loader>
+    <app-loader/>
+  </ng-template>
+
+
+  <div *ngIf="isViewConfirmWindow" class="center">
+    <app-modal-window>
+      <div>Удалить испытание?</div>
+      <div class="btn" (click)="deleteUser()">да</div>
+      <div class="btn" (click)="cancelModalWindow()">отмена</div>
+    </app-modal-window>
+  </div>
+  <div *ngIf="isViewInformer">
+    <app-modal-window>
+      <div *ngIf="isError">Ошибка.</div>
+      <div class="message-modal">{{message}}</div>
+      <div class="center">
+        <div class="btn" (click)="cancelModalInformer()">закрыть</div>
+      </div>
+    </app-modal-window>
+  </div>
+</div>

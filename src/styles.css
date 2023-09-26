@@ -1,1 +1,118 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('src/assets/font/gilroy/stylesheet.css?family=Gilroy');
+
+*{
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-family: 'Gilroy', serif;
+  font-style: normal;
+  font-weight: 300;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  height: 100%;
+
+  /*background-color: rgba(255, 178, 115, 0.22);*/
+}
+input, input:before, input:after {
+  -webkit-user-select: initial;
+  -khtml-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
+}
+:root{
+  --base-color: #BF3030;
+  --base-second-color: #A60000;
+  --base-dark-color: #930909;
+  --second-green-color: #008500;
+  --second-blue-color: #006363;
+  --second-orange-color: #ff9640;
+  --standart-gradient: linear-gradient(to bottom right, rgba(255, 128, 0, 0.27), rgba(255, 21, 0, 0.14), rgba(153, 255, 0, 0.2));
+
+}
+.btn-green,
+.btn-blue,
+.btn {
+  background-color: var(--base-color);
+  color: white;
+  font-weight: 600;
+  border: 2px solid var(--base-color);
+  padding: 10px;
+  display: inline-block;
+  border-radius: 10px;
+  margin: 10px;
+  min-width: 100px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-green{
+  background-color: var(--second-green-color);
+  border: 2px solid var(--second-green-color);
+}
+.btn-blue{
+  background-color: var(--second-blue-color);
+  border: 2px solid var(--second-blue-color);
+}
+
+.standard-shadow {
+  background: rgba(255, 150, 64, 0.34);
+  padding: 5px 10px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  margin: 8px;
+}
+
+input{
+  width: 90%;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 3px 10px;
+  max-width: 300px;
+}
+
+.center{
+  text-align: center;
+}
+
+.img-description-task{
+  width: 60%;
+  max-width: 400px;
+}
+
+table{
+  table-layout:fixed;
+}
+td,th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  text-align: center;
+  font-size: 16px;
+}
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+pre {
+  white-space: pre-wrap;
+}
+@media (max-width:400px) {
+  td,th{
+    font-size: 12px;
+  }
+}

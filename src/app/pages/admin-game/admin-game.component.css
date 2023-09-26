@@ -1,0 +1,41 @@
+.admin-game-wrapper{
+  padding: 10px;
+}
+.settings-ico{
+  width: 40px;
+  position: absolute;
+  top:10px;
+  right: 10px;
+  cursor: pointer;
+}
+.wrapper-btn-statistic{
+
+}
+.message-not-game{
+  font-size: 24px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--base-dark-color);
+}
+.message-modal{
+  font-size: 22px;
+  text-align: center;
+  font-weight: 600;
+  margin: 10px 0;
+}
+.filter-item{
+  background-color: var(--second-orange-color);
+  color: white;
+  font-weight: 600;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.filter-table{
+  margin: 10px;
+}
+.title-archive-game{
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}

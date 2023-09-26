@@ -1,0 +1,17 @@
+<div *ngIf="isLoad && game">
+  <div *ngIf="!statistic" class="statistic-page-not-data">Нет результатов опроса</div>
+  <div *ngIf="statistic">
+    <div *ngFor="let g of statistic.result">
+      <app-grade-game [grade]="g" />
+    </div>
+    <div class="statistic-page-char-wrapper">
+      <app-grade-char [grades]="statistic.result" />
+    </div>
+  </div>
+  <a class="btn" [href]="urlLoad+game.id">Скачать excel</a>
+  <ng-content></ng-content>
+</div>
+
+<div *ngIf="!isLoad">
+  <app-loader />
+</div>

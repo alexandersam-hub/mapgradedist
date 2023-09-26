@@ -1,0 +1,11 @@
+table {
+  width: 100%;
+}
+.grade-game-wrapper{
+  margin: 10px;
+}
+.title-table{
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.55);
+  margin-bottom: 5px;
+}

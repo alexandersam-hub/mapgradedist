@@ -1,0 +1,25 @@
+<div *ngIf="isLoad; else notLoad">
+  <div class="message-not-grade" *ngIf="grades.length === 0">нет опросов</div>
+  <app-grade-config-card *ngFor="let grade of grades"
+                         [grade]="grade"
+                         (deleteGradeEmitter)="requestDeleteGrade($event)"
+                         (saveGradeEmitter)="saveGrade($event)"/>
+  <div class="btn" (click)="addEmptyGrade()">добавить опрос</div>
+</div>
+<div *ngIf="isViewInformer">
+  <app-modal-window>
+    <div class="message-modal">{{message}}</div>
+    <div class="center">
+      <div class="btn" (click)="cancelModalInformer()">закрыть</div>
+    </div>
+  </app-modal-window>
+</div>
+<div *ngIf="isViewConfirmWindow" class="center">
+  <app-modal-window>
+    <div class="message-modal">удалить опрос '{{deletedGrade?.title??''}}'?</div>
+    <div class="btn" (click)="deleteGrade()">да</div>
+    <div class="btn" (click)="cancelModalWindow()">отмена</div>
+  </app-modal-window>
+</div>
+
+<ng-template #notLoad><app-loader/></ng-template>

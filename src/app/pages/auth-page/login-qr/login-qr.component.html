@@ -1,0 +1,4 @@
+<div  *ngIf="isError">
+  <div class="login-qr-message">{{message}}</div>
+  <div class="center"><a class="link-auth" [routerLink]="['/', 'authorization']">перейти к странице авторизации</a></div>
+</div>

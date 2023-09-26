@@ -1,0 +1,6 @@
+<div *ngIf="game" class="game-config-view-wrapper">
+  <div class="game-config-view-title">{{game.title}}</div>
+  <div class="game-config-view-description">{{game.type}}</div>
+  <div class="game-config-view-description">{{game.dateGame}}</div>
+  <ng-content></ng-content>
+</div>
